@@ -25,6 +25,7 @@ class Pets(models.Model):
         ordering = ('name',)
         verbose_name = 'Животное'
         verbose_name_plural = 'Животные'
+        db_table = 'Pets'
 
     def __str__(self):
         return self.name
@@ -41,6 +42,7 @@ class PetType(models.Model):
         ordering = ('name',)
         verbose_name = 'Тип животного'
         verbose_name_plural = 'Типы животного'
+        db_table = 'PetTypes'
 
     def __str__(self):
         return self.name
@@ -54,8 +56,10 @@ class Breeds(models.Model):
                              verbose_name='Тип животного')
 
     class Meta():
+        ordering = ('name',)
         verbose_name = 'Порода'
         verbose_name_plural = 'Породы'
+        db_table = 'Breeds'
 
     def __str__(self):
         return self.name

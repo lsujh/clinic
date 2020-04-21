@@ -1,9 +1,9 @@
 {% extends "user_account/base.html" %}
 {% block content %}
+<h3>Редактирование питомца</h3>
 <form method="post" enctype=multipart/form-data>
-
-      {{ pet_form.as_p }}
-       <input type="submit" value="Сохранить">
-      {% csrf_token %}
-  </form>
+    {% csrf_token %}
+    {{ pet_form.as_p }}
+    <input type="submit" value="Сохранить">
+</form>
 {% endblock %}

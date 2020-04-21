@@ -1,13 +1,19 @@
 {% extends "user_account/base.html" %}
 {% load static %}
 {% block content %}
-  {% for pet in pets %}
-    <p>{{ pet.name }}</p>
-    <p>{{ pet.date_of_birth }}</p>
-    <p>{{ pet.get_sex_display }}</p>
-    <p>{{ pet.type }}</p>
-    <p>{{ pet.breed }}</p>
-    <p>{{ pet.weight }}</p>
-    <img src="{% if pet.image %}{{ pet.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-  {% endfor %}
+<h3>Все питомцы</h3>
+<form method="get" action="/add_pet">
+  <input type="submit" value="Добавить">
+</form>
+{% for pet in pets %}
+<p>{{ pet.name }}</p>
+<p>{{ pet.date_of_birth }}</p>
+<p>{{ pet.get_sex_display }}</p>
+<p>{{ pet.type }}</p>
+<p>{{ pet.breed }}</p>
+<p>{{ pet.weight }}</p>
+<img src="{% if pet.image %}{{ pet.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+<p><a href="{% url 'user_account:edit_pet' id=pet.id %}">Редактировать</a></p>
+<p><a href="{% url 'user_account:delete_pet' id=pet.id %}">Удалить</a></p>
+{% endfor %}
 {% endblock %}
