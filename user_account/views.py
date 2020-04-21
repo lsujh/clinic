@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import AddPetsForm
 from .models import Pets
@@ -8,6 +7,8 @@ from .models import Pets
 @login_required
 def all_pets_user(request):
     pets = Pets.objects.filter(user=request.user)
+    for pet in pets:
+        print(pet)
     return render(request, 'user_account/all_pets_user.html', {'pets': pets})
 
 
@@ -34,11 +35,10 @@ def edit_pet(request, id):
             pet_form.save()
             return redirect('user_account:all_pets_user')
     else:
-        pet_form = AddPetsForm(initial={'name':data.name,'slug': data.slug,
-                                        'date_of_birth': data.date_of_birth,
-                                        'sex': data.sex, 'type': data.type,
-                                        'breed': data.breed, 'weight': data.weight,
-                                        'image': data.image})
+        pet_form = AddPetsForm(initial={'PetName':data.PetName, 'DateOfBirth': data.DateOfBirth,
+                                        'PetSex': data.PetSex, 'PetTypeId': data.PetTypeId,
+                                        'BreedId': data.BreedId, 'Weight': data.Weight,
+                                        'Image': data.Image})
     return render(request, 'user_account/edit_pet.html', {'pet_form': pet_form})
 
 

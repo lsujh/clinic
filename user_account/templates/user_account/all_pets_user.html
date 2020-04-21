@@ -6,13 +6,13 @@
   <input type="submit" value="Добавить">
 </form>
 {% for pet in pets %}
-<p>{{ pet.name }}</p>
-<p>{{ pet.date_of_birth }}</p>
-<p>{{ pet.get_sex_display }}</p>
-<p>{{ pet.type }}</p>
-<p>{{ pet.breed }}</p>
-<p>{{ pet.weight }}</p>
-<img src="{% if pet.image %}{{ pet.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+<p>{{ pet.PetName }}</p>
+<p>{{ pet.DateOfBirth }}</p>
+<p>{{ pet.get_PetSex_display }}</p>
+<p>{{ pet.PetTypeId }}</p>
+<p>{{ pet.BreedId }}</p>
+<p>{{ pet.Weight }}</p>
+<img src="{% if pet.Image %}{{ pet.Image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
 <p><a href="{% url 'user_account:edit_pet' id=pet.id %}">Редактировать</a></p>
 <p><a href="{% url 'user_account:delete_pet' id=pet.id %}">Удалить</a></p>
 {% endfor %}

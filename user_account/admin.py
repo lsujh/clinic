@@ -1,17 +1,6 @@
 from django.contrib import admin
-from .models import Pets, Breeds, PetType
+from .models import Pets, Breeds, PetTypes
 
-
-@admin.register(Pets)
-class PetsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
-
-
-@admin.register(PetType)
-class PetTypeAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
-
-
-@admin.register(Breeds)
-class BreedsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
+admin.site.register(Pets)
+admin.site.register(PetTypes)
+admin.site.register(Breeds)

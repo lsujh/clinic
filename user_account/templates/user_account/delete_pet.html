@@ -3,14 +3,14 @@
 {% block content %}
 <h3>Удаление питомца</h3>
 {% for pet in pet_data %}
-    <p>{{ pet.name }}</p>
-    <p>{{ pet.date_of_birth }}</p>
-    <p>{{ pet.get_sex_display }}</p>
-    <p>{{ pet.type }}</p>
-    <p>{{ pet.breed }}</p>
-    <p>{{ pet.weight }}</p>
-    <img src="{% if pet.image %}{{ pet.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-  {% endfor %}
+<p>{{ pet.PetName }}</p>
+<p>{{ pet.DateOfBirth }}</p>
+<p>{{ pet.get_PetSex_display }}</p>
+<p>{{ pet.PetTypeId }}</p>
+<p>{{ pet.BreedId }}</p>
+<p>{{ pet.Weight }}</p>
+<img src="{% if pet.Image %}{{ pet.Image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+{% endfor %}
 <form method="post">
     {% csrf_token %}
     <input type="submit" value="Удалить">
