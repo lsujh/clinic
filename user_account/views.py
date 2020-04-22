@@ -18,7 +18,7 @@ def add_pet(request):
         pet_form = AddPetsForm(request.POST, request.FILES)
         if pet_form.is_valid():
             pet = pet_form.save(commit=False)
-            pet.user = request.user
+            pet.UserId = request.user
             pet.save()
             return redirect('user_account:all_pets_user')
     else:
