@@ -4,7 +4,7 @@ from .models import Pets
 class AddPetsForm(ModelForm):
     class Meta():
         model = Pets
-        exclude = ('user',)
+        exclude = ('UserId',)
 
 
 

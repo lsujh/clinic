@@ -6,7 +6,7 @@ from .models import Pets
 
 @login_required
 def all_pets_user(request):
-    pets = Pets.objects.filter(user=request.user)
+    pets = Pets.objects.filter(UserId=request.user)
     for pet in pets:
         print(pet)
     return render(request, 'user_account/all_pets_user.html', {'pets': pets})
@@ -28,7 +28,7 @@ def add_pet(request):
 
 @login_required
 def edit_pet(request, id):
-    data = get_object_or_404(Pets, id=id, user=request.user)
+    data = get_object_or_404(Pets, PetId=id, UserId=request.user)
     if request.method == 'POST':
         pet_form = AddPetsForm(request.POST, request.FILES, instance=data)
         if pet_form.is_valid():
@@ -44,7 +44,7 @@ def edit_pet(request, id):
 
 @login_required
 def delete_pet(request, id):
-    pet_data = Pets.objects.filter(id=id)
+    pet_data = Pets.objects.filter(PetId=id)
     if request.method == 'POST':
         pet_data.delete()
         return redirect('user_account:all_pets_user')

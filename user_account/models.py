@@ -1,10 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
+# from clinics.models import Clinics
 
 
 class Pets(models.Model):
     CHANGE_SEX = [('boy', 'МАЛЬЧИК'), ('girl', 'ДЕВОЧКА'), ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pet_user',
+    PetId = models.AutoField(primary_key=True)
+    UserId = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pet_user',
                                verbose_name='Пользователь')
     PetName = models.CharField('Кличка', max_length=50, db_index=True)
     DateOfBirth = models.DateField(
@@ -18,7 +20,7 @@ class Pets(models.Model):
         'Breeds', on_delete=models.PROTECT, related_name='pet_breed',
         verbose_name='Порода')
     Weight = models.FloatField('Вес', blank=True, null=True)
-    Image = models.ImageField('', upload_to='user', blank=True)
+    Image = models.ImageField('', upload_to='UserId', blank=True)
 
     class Meta:
         ordering = ('PetName',)
@@ -31,7 +33,9 @@ class Pets(models.Model):
 
 
 class PetTypes(models.Model):
+    PetTypeId = models.AutoField(primary_key=True)
     PetTypeName = models.CharField('Тип животного', max_length=50, db_index=True)
+    # ClinicId = models.ManyToManyField(Clinics)
 
     class Meta():
         ordering = ('PetTypeName',)
@@ -44,6 +48,7 @@ class PetTypes(models.Model):
 
 
 class Breeds(models.Model):
+    BreedId = models.AutoField(primary_key=True)
     BreedName = models.CharField('Порода', max_length=50, db_index=True)
     PetTypeId = models.ForeignKey(PetTypes, on_delete=models.PROTECT,
                                   related_name='breed_type',
