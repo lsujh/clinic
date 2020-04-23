@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_account.apps.UserAccountConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -71,15 +72,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'clinic.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+'default': {
+    'ENGINE': 'sql_server.pyodbc',
+    'NAME': 'clinicdb',
+    'HOST': 'clinicdb.cvgzc4xzpbmj.eu-central-1.rds.amazonaws.com',
+    'USER': 'development1',
+    'PASSWORD': 'zXaSqW1@',
+    'OPTIONS' : {
+    'driver': 'ODBC Driver 17 for SQL Server',
+     },
 }
+}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
