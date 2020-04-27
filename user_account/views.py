@@ -1,55 +1,38 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .forms import AddPetsForm
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+from .serializers import PetsSerializer
 from .models import Pets
 
 
-@login_required
-def all_pets_user(request):
-    pets = Pets.objects.filter(UserId=request.user)
-    for pet in pets:
-        print(pet)
-    return render(request, 'user_account/all_pets_user.html', {'pets': pets})
+@api_view(['GET', 'POST'])
+def api_pets(request):
+    if request.method == 'GET':
+        pets = Pets.objects.filter(UserId=request.user)
+        serializer = PetsSerializer(pets, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = PetsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-@login_required
-def add_pet(request):
-    if request.method == 'POST':
-        pet_form = AddPetsForm(request.POST, request.FILES)
-        if pet_form.is_valid():
-            pet = pet_form.save(commit=False)
-            pet.UserId = request.user
-            pet.save()
-            return redirect('user_account:all_pets_user')
-    else:
-        pet_form = AddPetsForm()
-    return render(request, 'user_account/add_pet.html', {'pet_form': pet_form})
-
-
-@login_required
-def edit_pet(request, id):
-    data = get_object_or_404(Pets, PetId=id, UserId=request.user)
-    if request.method == 'POST':
-        pet_form = AddPetsForm(request.POST, request.FILES, instance=data)
-        if pet_form.is_valid():
-            pet_form.save()
-            return redirect('user_account:all_pets_user')
-    else:
-        pet_form = AddPetsForm(initial={'PetName':data.PetName, 'DateOfBirth': data.DateOfBirth,
-                                        'PetSex': data.PetSex, 'PetTypeId': data.PetTypeId,
-                                        'BreedId': data.BreedId, 'Weight': data.Weight,
-                                        'Image': data.Image})
-    return render(request, 'user_account/edit_pet.html', {'pet_form': pet_form})
-
-
-@login_required
-def delete_pet(request, id):
-    pet_data = Pets.objects.filter(PetId=id)
-    if request.method == 'POST':
-        pet_data.delete()
-        return redirect('user_account:all_pets_user')
-    else:
-        return render(request, 'user_account/delete_pet.html', {'pet_data': pet_data})
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
+def api_pet_detail(request, pk):
+    pet = Pets.objects.get(pk=pk)
+    if request.method == 'GET':
+        serializer = PetsSerializer(pet)
+        return Response(serializer.data)
+    elif request.method == 'PUT' or request.method == 'PATCH':
+        serializer = PetsSerializer(pet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        pet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 

@@ -38,18 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_account.apps.UserAccountConfig',
-
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'clinic.urls'
 
@@ -72,24 +76,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'clinic.wsgi.application'
 
 
-DATABASES = {
-'default': {
-    'ENGINE': 'sql_server.pyodbc',
-    'NAME': 'clinicdb',
-    'HOST': 'clinicdb.cvgzc4xzpbmj.eu-central-1.rds.amazonaws.com',
-    'USER': 'development1',
-    'PASSWORD': 'zXaSqW1@',
-    'OPTIONS' : {
-    'driver': 'ODBC Driver 17 for SQL Server',
-     },
-}
-}
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
+# 'default': {
+#     'ENGINE': 'sql_server.pyodbc',
+#     'NAME': 'clinicdb',
+#     'HOST': 'clinicdb.cvgzc4xzpbmj.eu-central-1.rds.amazonaws.com',
+#     'USER': 'development1',
+#     'PASSWORD': 'zXaSqW1@',
+#     'OPTIONS' : {
+#     'driver': 'ODBC Driver 17 for SQL Server',
+#      },
 # }
+# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation

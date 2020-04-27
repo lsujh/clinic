@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-# from clinics.models import Clinics
 
 
 class Pets(models.Model):
@@ -35,7 +34,7 @@ class Pets(models.Model):
 class PetTypes(models.Model):
     PetTypeId = models.AutoField(primary_key=True)
     PetTypeName = models.CharField('Тип животного', max_length=50, db_index=True)
-    # ClinicId = models.ManyToManyField(Clinics)
+
 
     class Meta():
         ordering = ('PetTypeName',)
