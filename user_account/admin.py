@@ -4,7 +4,7 @@ from .models import Pets, Breeds, PetTypes
 
 class PetsAdmin(admin.ModelAdmin):
     model = Pets
-    list_display = ('PetId', 'PetName', 'UserId')
+    list_display = ('pet_id', 'pet_name', 'user_id')
 
 admin.site.register(Pets, PetsAdmin)
 admin.site.register(PetTypes)

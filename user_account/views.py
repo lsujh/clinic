@@ -8,7 +8,7 @@ from .models import Pets
 @api_view(['GET', 'POST'])
 def api_pets(request):
     if request.method == 'GET':
-        pets = Pets.objects.filter(UserId=request.user)
+        pets = Pets.objects.filter(user_id=request.user)
         serializer = PetsSerializer(pets, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
