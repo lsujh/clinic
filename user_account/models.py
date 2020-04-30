@@ -35,8 +35,7 @@ class PetTypes(models.Model):
     pet_type_id = models.AutoField(primary_key=True, db_column='PetTypeId')
     pet_type_name = models.CharField('Тип животного', max_length=50, db_index=True, db_column='PetTypeName')
 
-
-    class Meta():
+    class Meta:
         ordering = ('pet_type_name',)
         verbose_name = 'Тип животного'
         verbose_name_plural = 'Типы животного'
@@ -53,7 +52,7 @@ class Breeds(models.Model):
                                     related_name='breed_type',
                                     verbose_name='Тип животного', db_column='PetTypeId')
 
-    class Meta():
+    class Meta:
         ordering = ('breed_name',)
         verbose_name = 'Порода'
         verbose_name_plural = 'Породы'
