@@ -20,7 +20,7 @@ def api_pets(request):
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def api_pet_detail(request, pk):
-    pet = Pets.objects.select_related().get(pk=pk)
+    pet = Pets.objects.select_related().get(pk=pk, user_id=request.user)
     if request.method == 'GET':
         serializer = PetsSerializer(pet)
         return Response(serializer.data)
