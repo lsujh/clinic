@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^mlty*^3*4r9az%)rjqmtguxf3y06034s1rfk4snd%pyv36qf^'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,8 +85,8 @@ WSGI_APPLICATION = 'clinic.wsgi.application'
 #     'ENGINE': 'sql_server.pyodbc',
 #     'NAME': 'clinicdb',
 #     'HOST': 'clinicdb.cvgzc4xzpbmj.eu-central-1.rds.amazonaws.com',
-#     'USER': 'development1',
-#     'PASSWORD': 'zXaSqW1@',
+#     'USER': '',
+#     'PASSWORD': '',
 #     'OPTIONS' : {
 #     'driver': 'ODBC Driver 17 for SQL Server',
 #      },
